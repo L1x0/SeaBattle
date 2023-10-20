@@ -1,6 +1,6 @@
 import java.util.Arrays;
 public class Sea {
-    private String[][] sea = new String[10][10];
+    private final String[][] sea = new String[10][10];
 
     Sea() {     //приравниваем каждый элемент к _, как к пустому куску моря
 

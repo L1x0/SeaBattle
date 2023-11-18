@@ -10,6 +10,10 @@ public class Main {
 
         firstPersonSea.addShip(4);
         firstPersonSea.addShip(3);
+        firstPersonSea.addShip(3);
+        firstPersonSea.addShip(3);
+        firstPersonSea.addShip(3);
+        firstPersonSea.addShip(3);
 
 
 

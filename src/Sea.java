@@ -79,7 +79,7 @@ public class Sea {
 
                         if (!temp) {
                             for (int i = ship.columns - 1; count < length; i++) {
-                                sea[ship.rows - 1][i] = sea[ship.rows - 1][i].replace("~", "к");
+                                sea[ship.rows - 1][i] = sea[ship.rows - 1][i].replace("~", "К");
                                 count++;
                             }
                             getSea();
@@ -90,34 +90,69 @@ public class Sea {
                 }
 
                 if (ship.vector.equals("up")) {
-                    int count = 0;
+                    int count;
                     boolean allRight = true;
 
-                    if (ship.rows - ship.length <= 0) {
-                        for (int i = ship.rows; count < ship.length; i--) {
-                            if (!sea[i][ship.columns].equals("~")) {
+                    if (ship.rows - ship.length >= 0 && ship.rows <= 10
+                        && ship.columns >= 1 && ship.columns <= 10) {
+                        int posMin, posMax;
+                        boolean right, left;
+                        right = left = false;
+
+                        if (ship.rows != 10) {
+                            posMin = ship.rows;
+                        } else {
+                            posMin = ship.rows - 1;
+                        }
+                        if (ship.rows - 1 - ship.length >= 0) {
+                            posMax = ship.rows - 1 - ship.length;
+                        } else {
+                            posMax = ship.rows - ship.length;
+                        }
+                        if (ship.columns == 1)
+                            left = true;
+                        else if (ship.columns == 10)
+                            right = true;
+
+                        for (int i = posMax; i < posMin; i++) {
+                            if (left && !right) {
+                                if (!sea[i][ship.columns].equals("~")) {
+                                    allRight = false;
+                                    break;
+                                }
+                            }
+                            if (right && !left) {
+                                if (!sea[i][ship.columns - 2].equals("~")) {
+                                    allRight = false;
+                                    break;
+                                }
+                            }
+                            if (!right && !left) {
+                                if (!sea[i][ship.columns - 2].equals("~") && !sea[i][ship.columns + 1].equals("~")) {
+                                    allRight = false;
+                                    break;
+                                }
+                            }
+                            if (!sea[i][ship.columns - 1].equals("~")) {
                                 allRight = false;
                                 break;
                             }
-                            if (ship.rows - ship.length != 0) {
-                                if (!sea[ship.rows - ship.length - 1][ship.columns].equals("~")) {
-                                    allRight = false;
-                                    break;
-                                }
-                            }
-                            if(ship.rows != 9) {
-                                if (!sea[ship.rows + 1][ship.columns].equals("~")) {
-                                    allRight = false;
-                                    break;
-                                }
-                            }
+                        }
+                    } else {
+                        allRight = false;
+                    }
+                    if (allRight) {
+                        count = 0;
 
+                        for (int i = ship.rows - 1; count < ship.length; i--) {
+                            sea[i][ship.columns - 1] = sea[i][ship.columns - 1].replace("~", "К");
                             count++;
                         }
-
-
+                        getSea();
+                        break;
+                    } else {
+                        System.out.println("Ваши координаты конфликтуют с расположением на поле");
                     }
-                    System.out.println("Ваши координаты конфликтуют с расположением на поле");
                 }
             }
         }

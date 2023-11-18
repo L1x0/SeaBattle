@@ -1,15 +1,16 @@
 import java.util.Arrays;
+
 public class Sea {
     private final String[][] sea = new String[10][10];
 
-    Sea() {     //приравниваем каждый элемент к _, как к пустому куску моря
+    Sea() {     //приравниваем каждый элемент к m, как к пустому куску моря
 
         for (String[] e : sea) {
-            Arrays.fill(e, "m");
+            Arrays.fill(e, "~");
         }
     }
 
-    public void getSea() {//Вывод поля
+    public void getSea() {      //Вывод поля
         System.out.println();
 
         System.out.print("   ");
@@ -28,6 +29,97 @@ public class Sea {
                 System.out.print(el + " ");
             }
             i++;
+        }
+    }
+
+    public void addShip(int length) {
+        getSea();
+        while (true) {
+            boolean temp = false;
+            int x, y, z;
+            Ship ship = new Ship(length);
+
+            if (ship.rows <= 10 && ship.rows >= 1 && ship.columns <= 10 && ship.columns >= 1) {
+
+                if (ship.vector.equals("right")) {
+                    int count = 0;
+
+                    if (ship.rows == 1) {
+                        x = 1;
+                    } else {
+                        x = 2;
+                    }
+
+                    if (ship.columns - 1 == 0) {
+                        y = 0;
+                    } else {
+                        y = ship.columns - 2;
+                    }
+
+                    if (ship.columns + ship.length - 1 <= 10) { //проверка правильности координат
+                        for (int i = ship.columns - 1; count < length; i++) {
+
+                            if (i + 1 == 10) {
+                                z = 9;
+                            } else {
+                                z = i + 1;
+                            }
+
+                            if (!sea[ship.rows - x][i].equals("~") | !sea[ship.rows == 10 ? ship.rows - 1 : ship.rows][i].equals("~")) {
+                                temp = true;
+                                break;
+                            } else if (!sea[ship.rows - 1][y].equals("~") | !sea[ship.rows - 1][z].equals("~")) {
+                                temp = true;
+                                break;
+                            }
+
+                            count++;
+                        }
+                        count = 0;
+
+                        if (!temp) {
+                            for (int i = ship.columns - 1; count < length; i++) {
+                                sea[ship.rows - 1][i] = sea[ship.rows - 1][i].replace("~", "к");
+                                count++;
+                            }
+                            getSea();
+                            break;
+                        }
+                    }
+                    System.out.print("\nДанные введены неккоректно, введите их заново");
+                }
+
+                if (ship.vector.equals("up")) {
+                    int count = 0;
+                    boolean allRight = true;
+
+                    if (ship.rows - ship.length <= 0) {
+                        for (int i = ship.rows; count < ship.length; i--) {
+                            if (!sea[i][ship.columns].equals("~")) {
+                                allRight = false;
+                                break;
+                            }
+                            if (ship.rows - ship.length != 0) {
+                                if (!sea[ship.rows - ship.length - 1][ship.columns].equals("~")) {
+                                    allRight = false;
+                                    break;
+                                }
+                            }
+                            if(ship.rows != 9) {
+                                if (!sea[ship.rows + 1][ship.columns].equals("~")) {
+                                    allRight = false;
+                                    break;
+                                }
+                            }
+
+                            count++;
+                        }
+
+
+                    }
+                    System.out.println("Ваши координаты конфликтуют с расположением на поле");
+                }
+            }
         }
     }
 }

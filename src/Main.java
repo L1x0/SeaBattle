@@ -1,12 +1,16 @@
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
         Sea firstPersonSea = new Sea();
         Sea firstPersonScheme = new Sea();
         Sea secondPersonSea = new Sea();
         Sea secondPersonScheme = new Sea();
 
-        Scanner scan = new Scanner(System.in);
+        firstPersonSea.addShip(4);
+        firstPersonSea.addShip(3);
+
 
 
 

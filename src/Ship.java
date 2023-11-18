@@ -2,13 +2,29 @@ import java.util.Scanner;
 
 public class Ship {
     protected int length;
+    protected int rows, columns;
+    protected String vector;
 
-
-    Ship() {
+    Ship(int length) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите размер корабля: ");
-        length = scanner.nextInt();
-        System.out.println("");
-        System.out.print("Введите первую одну координату");
+
+        if (length > 1) {
+
+            System.out.print("\nДлина коробля равна: " + length);
+            this.length = length;
+
+            System.out.print("\nВведите одну,левую крайнюю или нижнюю крайнюю, координату (x;y)");
+            columns = scanner.nextInt();
+            rows = scanner.nextInt();
+
+            System.out.print("\nВВедите направление коробля(right, up): ");
+            vector = scanner.next();
+        } else {
+            vector = null;
+
+            System.out.print("\nВведите координату (x;y)");
+            columns = scanner.nextInt();
+            rows = scanner.nextInt();
+        }
     }
 }

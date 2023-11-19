@@ -33,7 +33,6 @@ public class Sea {
     }
 
     public void addShip(int length) {
-        getSea();
         while (true) {
             boolean temp = false;
             int x, y, z;

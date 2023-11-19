@@ -94,7 +94,7 @@ public class Sea {
                     boolean allRight = true;
 
                     if (ship.rows - ship.length >= 0 && ship.rows <= 10
-                        && ship.columns >= 1 && ship.columns <= 10) {
+                            && ship.columns >= 1 && ship.columns <= 10) {
                         int posMin, posMax;
                         boolean right, left;
                         right = left = false;
@@ -114,7 +114,7 @@ public class Sea {
                         else if (ship.columns == 10)
                             right = true;
 
-                        for (int i = posMax; i < posMin; i++) {
+                        for (int i = posMax; i <= posMin; i++) {
                             if (left && !right) {
                                 if (!sea[i][ship.columns].equals("~")) {
                                     allRight = false;
@@ -128,7 +128,66 @@ public class Sea {
                                 }
                             }
                             if (!right && !left) {
-                                if (!sea[i][ship.columns - 2].equals("~") && !sea[i][ship.columns + 1].equals("~")) {
+                                if (!sea[i][ship.columns - 2].equals("~") || !sea[i][ship.columns + 1].equals("~")) {
+                                    allRight = false;
+                                    break;
+                                }
+                            }
+                            if (!sea[i][ship.columns - 1].equals("~")) {
+                                allRight = false;
+                                break;
+                            }
+                        }
+                    } else {
+                        allRight = false;
+                    }
+                    if (allRight) {
+                        count = 0;
+
+                        for (int i = ship.rows - 1; count < ship.length; i--) {
+                            sea[i][ship.columns - 1] = sea[i][ship.columns - 1].replace("~", "К");
+                            count++;
+                        }
+                        getSea();
+                        break;
+                    } else {
+                        System.out.println("Ваши координаты конфликтуют с расположением на поле");
+                    }
+                }
+                if (ship.vector.equals("one")) {
+                    int count, posMax, posMin;
+                    boolean allRight = true;
+                    boolean left, right;
+                    left = right = false;
+
+                    if (ship.rows >= 1 && ship.rows <= 10
+                            && ship.columns >= 1 && ship.columns <= 10) {
+                        if (ship.columns == 1)
+                            left = true;
+                        else if (ship.columns == 10)
+                            right = true;
+                        if (ship.rows > 1)
+                            posMax = ship.rows - 2;
+                        else posMax = 0;
+                        if (ship.rows < 10)
+                            posMin = ship.rows;
+                        else posMin = ship.rows - 1;
+
+                        for (int i = posMax; i <= posMin; i++) {
+                            if (left) {
+                                if (!sea[i][ship.columns].equals("~")) {
+                                    allRight = false;
+                                    break;
+                                }
+                            }
+                            if (right) {
+                                if (!sea[i][ship.columns - 2].equals("~")) {
+                                    allRight = false;
+                                    break;
+                                }
+                            }
+                            if (!right && !left) {
+                                if (!sea[i][ship.columns - 2].equals("~") || !sea[i][ship.columns].equals("~")) {
                                     allRight = false;
                                     break;
                                 }
@@ -158,3 +217,4 @@ public class Sea {
         }
     }
 }
+

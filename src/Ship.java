@@ -20,7 +20,10 @@ public class Ship {
             System.out.print("\nВВедите направление коробля(right, up): ");
             vector = scanner.next();
         } else {
-            vector = null;
+            vector = "one";
+
+            System.out.print("\nДлина коробля равна: " + length);
+            this.length = length;
 
             System.out.print("\nВведите координату (x;y)");
             columns = scanner.nextInt();

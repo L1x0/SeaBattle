@@ -8,22 +8,27 @@ public class Main {
         Sea secondPersonSea = new Sea();
         Sea secondPersonScheme = new Sea();
 
+        firstPersonSea.addShip(1);
+        firstPersonSea.addShip(1);
+        firstPersonSea.addShip(1);
+        firstPersonSea.addShip(1);
         firstPersonSea.addShip(4);
         firstPersonSea.addShip(3);
         firstPersonSea.addShip(3);
-        firstPersonSea.addShip(3);
-        firstPersonSea.addShip(3);
-        firstPersonSea.addShip(3);
-
-
-
+        firstPersonSea.addShip(2);
+        firstPersonSea.addShip(2);
+        firstPersonSea.addShip(2);
+        firstPersonSea.addShip(1);
+        firstPersonSea.addShip(1);
+        firstPersonSea.addShip(1);
+        firstPersonSea.addShip(1);
 
     }
 }
 
 /*TODO:
-DONE 1) Создать класс поля и создать отрисовку
-2) Создать класс кораблей и научиться их распологать на поле
+DONE 1) Создать класс поля и создать отрисовку Done
+2) Создать класс кораблей и научиться их распологать на поле Done
 3) Создать принцип стрельбы
  */
 // \uD83D\DEE5 -- корабль

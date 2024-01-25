@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Sea {
     private final String[][] sea = new String[10][10];
@@ -9,6 +10,7 @@ public class Sea {
             Arrays.fill(e, "~");
         }
     }
+
 
     public void getSea() {      //Вывод поля
         System.out.println();
@@ -214,6 +216,27 @@ public class Sea {
                 }
             }
         }
+    }
+
+    public void attack(Sea target, Sea ownSea) {
+        int x, y;
+        while (true) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Введите пожалуйста координаты через пробел: ");
+            x = sc.nextInt();
+            y = sc.nextInt();
+            if (target.sea[x][y].equals("~")) {
+                target.sea[x][y] = target.sea[x][y].replace("~", "*");
+                break;
+            }
+            if (target.sea[x][y].equals("К")) {
+                target.sea[x][y] = target.sea[x][y].replace("К", "П");
+            }
+            if (target.sea[x][y].equals("*")) {
+                System.out.println("В этой позиции ничего нет");
+            }
+        }
+        // Прописать проверку для обведения уничтоженного корабля
     }
 }
 

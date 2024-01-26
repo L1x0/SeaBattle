@@ -218,25 +218,73 @@ public class Sea {
         }
     }
 
-    public void attack(Sea target, Sea ownSea) {
+    public static void attack(Sea target, Sea ownSea) {
         int x, y;
         while (true) {
             Scanner sc = new Scanner(System.in);
-            System.out.println("Введите пожалуйста координаты через пробел: ");
-            x = sc.nextInt();
-            y = sc.nextInt();
+            System.out.println("\nВведите пожалуйста координаты через пробел: ");
+            y = sc.nextInt() - 1;
+            x = sc.nextInt() - 1;
             if (target.sea[x][y].equals("~")) {
                 target.sea[x][y] = target.sea[x][y].replace("~", "*");
+                ownSea.sea[x][y] = ownSea.sea[x][y].replace("~", "*");
                 break;
             }
             if (target.sea[x][y].equals("К")) {
                 target.sea[x][y] = target.sea[x][y].replace("К", "П");
+                ownSea.sea[x][y] = ownSea.sea[x][y].replace("~", "П");
+                stars(x, y, target, ownSea);
             }
             if (target.sea[x][y].equals("*")) {
                 System.out.println("В этой позиции ничего нет");
             }
         }
-        // Прописать проверку для обведения уничтоженного корабля
+    }
+
+    static public void stars(int x, int y, Sea target, Sea ownSea) {
+        int xMin, yMin, xMax, yMax;
+        boolean check = true;
+        if (x == 1)
+            xMin = 1;
+        else
+            xMin = x - 1;
+
+        if (x == 10)
+            xMax = 10;
+        else
+            xMax = x + 1;
+
+        if (y == 1)
+            yMin = 1;
+        else
+            yMin = y - 1;
+
+        if (y == 10)
+            yMax = 10;
+        else
+            yMax = y + 1;
+
+        for (int i = xMin; i <= xMax; i++) {
+            for (int j = yMin; j <= yMax; j++) {
+                if (target.sea[i][j].equals("К")) {
+                    check = false;
+                    break;
+                }
+            }
+        }
+        if (check) {
+            for (int i = xMin; i <= xMax; i++) {
+                for (int j = yMin; j <= yMax; j++) {
+                    if (i == x && j == y) {
+                        ownSea.sea[i][j] = ownSea.sea[i][j].replace("~", "*");
+                        continue;
+                    } else {
+                        ownSea.sea[i][j] = ownSea.sea[i][j].replace("~", "*");
+                        target.sea[i][j] = target.sea[i][j].replace("~", "*");
+                    }
+                }
+            }
+        }
     }
 }
 

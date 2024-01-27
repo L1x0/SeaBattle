@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Sea {
     private final String[][] sea = new String[10][10];
 
-    Sea() {     //приравниваем каждый элемент к m, как к пустому куску моря
+    Sea() {     //приравниваем каждый элемент к ~, как к пустому куску моря
 
         for (String[] e : sea) {
             Arrays.fill(e, "~");
@@ -233,58 +233,80 @@ public class Sea {
             if (target.sea[x][y].equals("К")) {
                 target.sea[x][y] = target.sea[x][y].replace("К", "П");
                 ownSea.sea[x][y] = ownSea.sea[x][y].replace("~", "П");
-                stars(x, y, target, ownSea);
+                if (target.checkOfVictory())
+                    break;
             }
             if (target.sea[x][y].equals("*")) {
-                System.out.println("В этой позиции ничего нет");
+                System.out.println("Вы уже стреляли сюда");
             }
         }
     }
 
-    static public void stars(int x, int y, Sea target, Sea ownSea) {
-        int xMin, yMin, xMax, yMax;
-        boolean check = true;
-        if (x == 1)
-            xMin = 1;
-        else
-            xMin = x - 1;
-
-        if (x == 10)
-            xMax = 10;
-        else
-            xMax = x + 1;
-
-        if (y == 1)
-            yMin = 1;
-        else
-            yMin = y - 1;
-
-        if (y == 10)
-            yMax = 10;
-        else
-            yMax = y + 1;
-
-        for (int i = xMin; i <= xMax; i++) {
-            for (int j = yMin; j <= yMax; j++) {
-                if (target.sea[i][j].equals("К")) {
-                    check = false;
-                    break;
-                }
+    public boolean checkOfVictory() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (this.sea[i][j].equals("К"))
+                    return false;
             }
         }
-        if (check) {
+        return true;
+    }
+
+    /*static public void stars(int x, int y, Sea target, Sea ownSea) {
+        int xMin, yMin, xMax, yMax, x1Min, y1Min, x1Max, y1Max;
+        boolean check = true;
+        while (true) {
+            if (x == 1)
+                xMin = 1;
+            else
+                xMin = x - 1;
+
+            if (x == 10)
+                xMax = 10;
+            else
+                xMax = x + 1;
+
+            if (y == 1)
+                yMin = 1;
+            else
+                yMin = y - 1;
+
+            if (y == 10)
+                yMax = 10;
+            else
+                yMax = y + 1;
+
             for (int i = xMin; i <= xMax; i++) {
                 for (int j = yMin; j <= yMax; j++) {
-                    if (i == x && j == y) {
-                        ownSea.sea[i][j] = ownSea.sea[i][j].replace("~", "*");
-                        continue;
-                    } else {
-                        ownSea.sea[i][j] = ownSea.sea[i][j].replace("~", "*");
-                        target.sea[i][j] = target.sea[i][j].replace("~", "*");
+                    if (target.sea[i][j].equals("К")) {
+                        check = false;
+                        break;
+                    }
+
+                }
+
+            for (int i = xMin; i <= xMax; i++) {
+                for (int j = yMin; j <= yMax; j++) {
+                    if (target.sea[i][j].equals("К")) {
+                        check = false;
+                        break;
+                    }
+                }
+            }
+            if (check) {
+                for (int i = xMin; i <= xMax; i++) {
+                    for (int j = yMin; j <= yMax; j++) {
+                        if (i == x && j == y) {
+                            ownSea.sea[i][j] = ownSea.sea[i][j].replace("~", "*");
+                            continue;
+                        } else {
+                            ownSea.sea[i][j] = ownSea.sea[i][j].replace("~", "*");
+                            target.sea[i][j] = target.sea[i][j].replace("~", "*");
+                        }
                     }
                 }
             }
         }
-    }
+    }*/
 }
 

@@ -222,17 +222,21 @@ public class Sea {
         int x, y;
         while (true) {
             Scanner sc = new Scanner(System.in);
-            System.out.println("\nВведите пожалуйста координаты через пробел: ");
+            System.out.println("\nВведите пожалуйста координаты для атаки через пробел: ");
             y = sc.nextInt() - 1;
             x = sc.nextInt() - 1;
             if (target.sea[x][y].equals("~")) {
+                System.out.println("Вы промахнулись");
                 target.sea[x][y] = target.sea[x][y].replace("~", "*");
                 ownSea.sea[x][y] = ownSea.sea[x][y].replace("~", "*");
+                ownSea.getSea();
                 break;
             }
             if (target.sea[x][y].equals("К")) {
+                System.out.println("Вы попали!");
                 target.sea[x][y] = target.sea[x][y].replace("К", "П");
                 ownSea.sea[x][y] = ownSea.sea[x][y].replace("~", "П");
+                ownSea.getSea();
                 if (target.checkOfVictory())
                     break;
             }

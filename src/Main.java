@@ -28,7 +28,7 @@ public class Main {
         firstPlayerOwnSea.addShip(1);
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
-        System.out.println("Игрок " + firstPlayerName + ", задайте свои корабли: ");
+        System.out.println("Игрок " + secondPlayerName + ", задайте свои корабли: ");
         secondPlayerOwnSea.addShip(4);
         secondPlayerOwnSea.addShip(3);
         secondPlayerOwnSea.addShip(3);
@@ -42,7 +42,42 @@ public class Main {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
         while (!secondPlayerOwnSea.checkOfVictory() || !secondPlayerOwnSea.checkOfVictory()) {
+            System.out.println(firstPlayerName);
 
+            firstPlayerOwnSea.getSea();
+            System.out.println("\n_____________________________________");
+            firstPlayerTargetSea.getSea();
+
+            Sea.attack(secondPlayerOwnSea, firstPlayerTargetSea);
+            if (secondPlayerOwnSea.checkOfVictory()) {
+                System.out.println("Игрок" + firstPlayerName + "победил!!!");
+                break;
+            }
+
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("Передайте компьютер дргугому пользователю");
+            System.out.println(secondPlayerName + " нажмите Enter");
+            sc.nextLine();
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
+            System.out.println(secondPlayerName);
+
+            secondPlayerOwnSea.getSea();
+            System.out.println("\n_____________________________________");
+            secondPlayerTargetSea.getSea();
+
+            Sea.attack(firstPlayerOwnSea, secondPlayerTargetSea);
+
+            if (firstPlayerOwnSea.checkOfVictory()) {
+                System.out.println("Игрок" + secondPlayerName + "победил!!!");
+                break;
+            }
+
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("Передайте компьютер дргугому пользователю");
+            System.out.println(firstPlayerName + " нажмите Enter");
+            sc.nextLine();
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         }
     }
 }
